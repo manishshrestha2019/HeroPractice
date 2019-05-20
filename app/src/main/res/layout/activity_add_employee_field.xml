@@ -11,7 +11,9 @@
         android:id="@+id/ivImageProfile"
         android:layout_gravity="center"
         android:layout_width="300dp"
-        android:layout_height="300dp" />
+        android:layout_height="300dp"
+        android:src="@drawable/ic_image_black_24dp"
+        />
 
     <EditText
         android:layout_width="match_parent"
