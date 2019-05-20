@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.content.CursorLoader;
@@ -17,15 +18,21 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
 import api.HeroesAPI;
+import model.ImageResponse;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import url.Url;
 
 public class AddEmployeeField extends AppCompatActivity {
     public static final String BASE_URL = "http://10.0.2.2:3000/";
@@ -33,6 +40,7 @@ public class AddEmployeeField extends AppCompatActivity {
     private Button btnAddField;
     private ImageView ivImageProfile;
     String imagePath;
+    String imageName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,19 +100,17 @@ public class AddEmployeeField extends AppCompatActivity {
 
     //Using @FieldMap
     private void addFieldMap() {
+        SaveImageOnly();
         String name = etNameField.getText().toString();
         String desc = etDescField.getText().toString();
 
         Map<String, String> map = new HashMap<>();
         map.put("name", name);
         map.put("desc", desc);
+        map.put("image",imageName);
 
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
 
-        HeroesAPI heroesAPI = retrofit.create(HeroesAPI.class);
+        HeroesAPI heroesAPI = Url.getInstance().create(HeroesAPI.class);
 
         Call<Void> heroesCall = heroesAPI.addHeroFieldMap(map);
 
@@ -161,6 +167,29 @@ public class AddEmployeeField extends AppCompatActivity {
         if (imgFile.exists()) {
             Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
             ivImageProfile.setImageBitmap(myBitmap);
+        }
+    }
+
+    private void StrictMode(){
+        StrictMode.ThreadPolicy policy=new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+    }
+    private void SaveImageOnly(){
+        File file =new File(imagePath);
+        RequestBody requestBody=RequestBody.create(MediaType.parse("multipart/form-data"),file);
+        MultipartBody.Part body=MultipartBody.Part.createFormData("imageFile",file.getName(),requestBody);
+
+        HeroesAPI heroesAPI= Url.getInstance().create(HeroesAPI.class);
+        Call<ImageResponse> responseBodyCall=heroesAPI.uploadImage(body);
+        StrictMode();
+
+        try{
+            Response<ImageResponse> imageResponseResponse=responseBodyCall.execute();
+            imageName=imageResponseResponse.body().getFilename();
+
+        }catch (IOException e){
+            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         }
     }
 
