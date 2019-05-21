@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.e.heropractice.R;
 
 import java.io.InputStream;
+import java.net.URL;
 import java.util.List;
 
 import model.Heroes;
@@ -50,11 +51,8 @@ public class HeroesAdapter extends RecyclerView.Adapter<HeroesAdapter.ViewHolder
         StrictMode();
 
         try{
-            Url url=new Url(imgPath);
+            URL url=new URL(imgPath);
             viewHolder.imgProfile.setImageBitmap(BitmapFactory.decodeStream((InputStream)url.getContent()));
-
-
-
 
         }catch (Exception e){
             e.printStackTrace();
@@ -66,7 +64,7 @@ public class HeroesAdapter extends RecyclerView.Adapter<HeroesAdapter.ViewHolder
 
     @Override
     public int getItemCount() {
-        return 0;
+        return heroesList.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

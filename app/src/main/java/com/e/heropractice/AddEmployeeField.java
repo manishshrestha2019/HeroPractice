@@ -30,8 +30,6 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 import url.Url;
 
 public class AddEmployeeField extends AppCompatActivity {
@@ -45,7 +43,7 @@ public class AddEmployeeField extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_employee_field);
+        setContentView(R.layout.activity_add_heroes_field);
 
         etNameField = findViewById(R.id.etNameField);
         etDescField = findViewById(R.id.etDescField);
@@ -118,7 +116,7 @@ public class AddEmployeeField extends AppCompatActivity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (!response.isSuccessful()) {
-                    Toast.makeText(AddEmployeeField.this, "Code" + response.code(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AddEmployeeField.this, "Successully added hero" , Toast.LENGTH_SHORT).show();
                     return;
                 }
                 Toast.makeText(AddEmployeeField.this, "Code" + response.code(), Toast.LENGTH_SHORT).show();

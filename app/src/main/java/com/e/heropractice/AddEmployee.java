@@ -32,43 +32,43 @@ public class AddEmployee extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Save();
+                //Save();
 
             }
         });
 
     }
 
-    private void Save() {
-        String name = etName.getText().toString();
-        String desc = etDesc.getText().toString();
-
-        Heroes heroes = new Heroes(name, desc);
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        HeroesAPI heroesAPI = retrofit.create(HeroesAPI.class);
-
-        Call<Void> heroesCall = heroesAPI.addHero(heroes);
-
-        heroesCall.enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if(!response.isSuccessful()){
-                    Toast.makeText(AddEmployee.this, "Code"+ response.code(), Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                Toast.makeText(AddEmployee.this,"Added",Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(AddEmployee.this, "Error"+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-
-            }
-        });
-    }
+//    private void Save() {
+//        String name = etName.getText().toString();
+//        String desc = etDesc.getText().toString();
+//
+//        Heroes heroes = new Heroes(name, desc);
+//        Retrofit retrofit = new Retrofit.Builder()
+//                .baseUrl(BASE_URL)
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//
+//        HeroesAPI heroesAPI = retrofit.create(HeroesAPI.class);
+//
+//        Call<Void> heroesCall = heroesAPI.addHero(heroes);
+//
+//        heroesCall.enqueue(new Callback<Void>() {
+//            @Override
+//            public void onResponse(Call<Void> call, Response<Void> response) {
+//                if(!response.isSuccessful()){
+//                    Toast.makeText(AddEmployee.this, "Code"+ response.code(), Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//                Toast.makeText(AddEmployee.this,"Added",Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Void> call, Throwable t) {
+//                Toast.makeText(AddEmployee.this, "Error"+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
+//    }
 }
 
