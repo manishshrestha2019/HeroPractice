@@ -8,9 +8,15 @@ import android.widget.Button;
 
 import java.io.InputStream;
 import java.net.Inet4Address;
+import java.util.List;
+
+import api.HeroesAPI;
+import model.Heroes;
+import retrofit2.Call;
+import url.Url;
 
 public class MainActivity extends AppCompatActivity {
-    private Button btnAddClass,btnAddField,btnViewHeroes;
+    private Button btnAddClass,btnAddField,btnViewHeroes,btnLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
         btnAddClass=findViewById(R.id.btnAddClass);
         btnAddField=findViewById(R.id.btnAddField);
         btnViewHeroes=findViewById(R.id.btnViewHeroes);
+        btnLogout=findViewById(R.id.btnLogout);
 
         btnAddClass.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +48,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+            }
+        });
+
     }
+
 
 }

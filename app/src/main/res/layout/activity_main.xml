@@ -24,6 +24,12 @@
         android:layout_height="wrap_content"
         android:id="@+id/btnViewHeroes"
         android:text="View Alll Heroes"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnLogout"
+        android:text="Log Out"/>
+
 
 
 
