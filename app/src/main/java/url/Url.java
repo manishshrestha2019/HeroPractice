@@ -6,6 +6,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Url {
     public static final String BASE_URL="http://10.0.2.2:3000/";
 
+    public static String Cookie="";
+
     //create instance
     public static Retrofit getInstance(){
         Retrofit retrofit=new Retrofit.Builder()

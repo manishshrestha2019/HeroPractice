@@ -32,7 +32,7 @@ public class ViewHeroes extends AppCompatActivity {
 
 
         final HeroesAPI heroesAPI = Url.getInstance().create(HeroesAPI.class);
-        Call<List<Heroes>> call = heroesAPI.getAllHeroes();
+        Call<List<Heroes>> call = heroesAPI.getAllHeroes(Url.Cookie);
         call.enqueue(new Callback<List<Heroes>>() {
             @Override
             public void onResponse(Call<List<Heroes>> call, Response<List<Heroes>> response) {

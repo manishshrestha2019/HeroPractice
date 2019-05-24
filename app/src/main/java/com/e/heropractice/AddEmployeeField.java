@@ -110,7 +110,7 @@ public class AddEmployeeField extends AppCompatActivity {
 
         HeroesAPI heroesAPI = Url.getInstance().create(HeroesAPI.class);
 
-        Call<Void> heroesCall = heroesAPI.addHeroFieldMap(map);
+        Call<Void> heroesCall = heroesAPI.addHeroFieldMap(Url.Cookie,map);
 
         heroesCall.enqueue(new Callback<Void>() {
             @Override
@@ -178,7 +178,7 @@ public class AddEmployeeField extends AppCompatActivity {
         MultipartBody.Part body=MultipartBody.Part.createFormData("imageFile",file.getName(),requestBody);
 
         HeroesAPI heroesAPI= Url.getInstance().create(HeroesAPI.class);
-        Call<ImageResponse> responseBodyCall=heroesAPI.uploadImage(body);
+        Call<ImageResponse> responseBodyCall=heroesAPI.uploadImage(Url.Cookie,body);
         StrictMode();
 
         try{
